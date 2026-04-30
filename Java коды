@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+
+// Product class
+class Product {
+    String name;
+    double price;
+    int quantity;
+
+    public Product(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public void showInfo() {
+        System.out.println(name + " | Price: " + price + " | Qty: " + quantity);
+    }
+}
+
+// Cart class
+class Cart {
+    ArrayList<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product) {
+        products.add(product);
+        System.out.println(product.name + " added to cart.");
+    }
+
+    public void showCart() {
+        System.out.println("\n--- CART ---");
+        double total = 0;
+
+        for (Product p : products) {
+            p.showInfo();
+            total += p.price * p.quantity;
+        }
+
+        System.out.println("Total price: " + total);
+    }
+}
+
+// User class
+class User {
+    String name;
+    Cart cart = new Cart();
+
+    public User(String name) {
+        this.name = name;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+
+        // Products
+        Product p1 = new Product("Laptop", 500000, 1);
+        Product p2 = new Product("Phone", 250000, 2);
+        Product p3 = new Product("Headphones", 30000, 1);
+
+        // User
+        User user = new User("Damir");
+
+        // Actions
+        user.cart.addProduct(p1);
+        user.cart.addProduct(p2);
+        user.cart.addProduct(p3);
+
+        // Show cart
+        user.cart.showCart();
+    }
+}
